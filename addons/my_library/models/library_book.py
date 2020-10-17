@@ -38,3 +38,9 @@ class LibraryBook(models.Model):
     )
     reader_rating = fields.Float("Reader Average Rating", digits=(14, 4))
     author_ids = fields.Many2many("res.partner", string="Authors")
+    currency_id = fields.Many2one(
+        "res_currency",
+        string="Currency",
+    )
+    cost_price = fields.Monetary("Cost Price")
+    retail_price = fields.Monetary("Retail Price")
