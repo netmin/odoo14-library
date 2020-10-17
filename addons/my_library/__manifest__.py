@@ -10,7 +10,7 @@
         'base',
     ],
     'data': [
-        'views.xml',
+        # 'views.xml',
     ],
     'demo': []
 }

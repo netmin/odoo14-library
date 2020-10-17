@@ -1,3 +1,4 @@
 .idea
 .env
 *.png
+__pycache__
