@@ -10,7 +10,7 @@
         'base',
     ],
     'data': [
-        # 'views.xml',
+        'library_book_views.xml',
     ],
     'demo': []
 }
