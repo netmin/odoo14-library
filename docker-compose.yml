@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  odoo14:
+    build:
+      context: .
+      args:
+        HOST_UID: 1000
+    depends_on:
+      - db
+    ports:
+      - "8014:8069"
+    volumes:
+      - odoo14-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo14-db-data:/var/lib/postgresql/data/pgdata
+volumes:
+  odoo14-data:
+  odoo14-db-data:
