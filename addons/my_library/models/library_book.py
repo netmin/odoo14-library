@@ -22,7 +22,7 @@ class LibraryBook(models.Model):
             ("lost", "Lost"),
         ],
         "State",
-        default='draft',
+        default="draft",
     )
     description = fields.Html("Description", sanitize=True, strip_style=False)
     cover = fields.Binary("Book Cover")
@@ -31,9 +31,9 @@ class LibraryBook(models.Model):
     date_updated = fields.Datetime("Last Updated")
     pages = fields.Integer(
         "Number of Pages",
-        groups='base.group_user',
-        states={'lost': [('readonly', True)]},
-        help='Total book page count',
+        groups="base.group_user",
+        states={"lost": [("readonly", True)]},
+        help="Total book page count",
         company_dependent=False,
     )
     reader_rating = fields.Float("Reader Average Rating", digits=(14, 4))
