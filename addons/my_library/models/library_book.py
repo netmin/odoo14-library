@@ -48,3 +48,4 @@ class LibraryBook(models.Model):
         "res.partner",
         string="Publisher",
     )
+    category_id = fields.Many2one("library.book.category")
