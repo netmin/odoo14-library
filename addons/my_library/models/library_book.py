@@ -44,3 +44,7 @@ class LibraryBook(models.Model):
     )
     cost_price = fields.Monetary("Cost Price")
     retail_price = fields.Monetary("Retail Price")
+    publisher_id = fields.Many2one(
+        "res.partner",
+        string="Publisher",
+    )
