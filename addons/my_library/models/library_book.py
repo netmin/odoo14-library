@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class LibraryBook(models.Model):
@@ -6,6 +6,13 @@ class LibraryBook(models.Model):
     _description = "Library Book"
     _order = "date_release desc, name"
     _rec_name = "short_name"
+    _sql_constraints = [
+        (
+            'name_uniq',
+            'UNIQUE (name)',
+            'Book title must be unique'
+        )
+    ]
 
     name = fields.Char("Title", required=True)
     short_name = fields.Char(
@@ -49,3 +56,11 @@ class LibraryBook(models.Model):
         string="Publisher",
     )
     category_id = fields.Many2one("library.book.category")
+
+    @api.constrains('date_release')
+    def _check_release_date(self):
+        for rec in self:
+            if rec.date_release > fields.Date.today():
+                raise models.ValidationError(
+                    'Release date must be in the past'
+                )
