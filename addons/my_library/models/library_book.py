@@ -50,6 +50,11 @@ class LibraryBook(models.Model):
         "res.partner",
         string="Publisher",
     )
+    publisher_city = fields.Char(
+        "Publisher City",
+        related="publisher_id.city",
+        readonly=True,
+    )
     category_id = fields.Many2one("library.book.category")
     age_days = fields.Float(
         string="Days Since Release",
