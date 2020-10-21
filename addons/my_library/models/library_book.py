@@ -62,6 +62,10 @@ class LibraryBook(models.Model):
         inverse="_inverse_age",
         search="_search_age",
     )
+    ref_doc_id = fields.Reference(
+        selection='_referencable_models',
+        string='Reference Document'
+    )
 
     @api.constrains("date_release")
     def _check_release_date(self):
@@ -94,3 +98,10 @@ class LibraryBook(models.Model):
         }
         new_op = operator_map.get(operator, operator)
         return [("date_release", new_op, value_date)]
+
+    @api.model
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([
+            ('field_id.name', '=', 'message_ids')
+        ])
+        return [(x.model, x.name) for x in models]
