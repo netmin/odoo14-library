@@ -64,8 +64,7 @@ class LibraryBook(models.Model):
         search="_search_age",
     )
     ref_doc_id = fields.Reference(
-        selection='_referencable_models',
-        string='Reference Document'
+        selection="_referencable_models", string="Reference Document"
     )
 
     @api.constrains("date_release")
@@ -102,7 +101,5 @@ class LibraryBook(models.Model):
 
     @api.model
     def _referencable_models(self):
-        models = self.env['ir.model'].search([
-            ('field_id.name', '=', 'message_ids')
-        ])
+        models = self.env["ir.model"].search([("field_id.name", "=", "message_ids")])
         return [(x.model, x.name) for x in models]

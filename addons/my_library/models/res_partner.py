@@ -12,11 +12,11 @@ class ResPartner(models.Model):
         string="Authored Books",
     )
     count_books = fields.Integer(
-        'Number of Authored Books',
-        compute='_compute_count_books',
+        "Number of Authored Books",
+        compute="_compute_count_books",
     )
 
-    @api.depends('authored_book_ids')
+    @api.depends("authored_book_ids")
     def _compute_count_books(self):
         for rec in self:
             rec.count_books = len(rec.authored_books_ids)
