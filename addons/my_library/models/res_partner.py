@@ -16,7 +16,7 @@ class ResPartner(models.Model):
         compute='_compute_count_books',
     )
 
-    @api.depends('authored_books_ids')
+    @api.depends('authored_book_ids')
     def _compute_count_books(self):
         for rec in self:
             rec.count_books = len(rec.authored_books_ids)
